@@ -17,6 +17,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('panel')->name('panel.')->group(function () {
         // module users
         Route::resource('users', UserController::class);
+        Route::put('users/update/{user}', [UserController::class, 'updateUser'])->name('users.updateUser');
         Route::get('list-users', [UserController::class, 'listUsers'])->name('list-users');
         // end module users
     });

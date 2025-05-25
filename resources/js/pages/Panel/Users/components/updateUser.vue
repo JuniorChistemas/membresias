@@ -12,6 +12,7 @@
                         <FormControl>
                             <Input id="name" type="text" v-bind="componentField" />
                         </FormControl>
+                        <FormMessage class="bg-red-400" />
                     </FormItem>
                 </FormField>
                 <FormField v-slot="{ componentField }" name="username">
@@ -20,6 +21,7 @@
                         <FormControl>
                             <Input id="username" type="text" v-bind="componentField" />
                         </FormControl>
+                        <FormMessage class="bg-red-400" />
                     </FormItem>
                 </FormField>
                 <FormField v-slot="{ componentField }" name="email">
@@ -28,6 +30,7 @@
                         <FormControl>
                             <Input id="email" type="text" v-bind="componentField" />
                         </FormControl>
+                        <FormMessage class="bg-red-400" />
                     </FormItem>
                 </FormField>
                 <FormField v-slot="{ componentField }" name="password">
@@ -36,6 +39,7 @@
                         <FormControl>
                             <Input id="password" type="password" v-bind="componentField" />
                         </FormControl>
+                        <FormMessage class="bg-red-400" />
                     </FormItem>
                 </FormField>
                 <FormField v-slot="{ componentField }" name="role">
@@ -53,13 +57,14 @@
                             </SelectContent>
                         </Select>
                     </FormItem>
+                    <FormMessage class="bg-red-400" />
                 </FormField>
                 <FormField v-slot="{ value, handleChange }" type="checkbox" name="status">
                     <FormItem class="flex flex-row items-start space-y-0 gap-x-3 rounded-md border p-4">
                         <FormControl> <Checkbox :model-value="value" @update:model-value="handleChange" /> </FormControl>
                         <div class="space-y-1 leading-none">
                             <FormLabel>Estado</FormLabel>
-                            <FormMessage />
+                            <FormMessage class="bg-red-400" />
                         </div>
                     </FormItem>
                 </FormField>

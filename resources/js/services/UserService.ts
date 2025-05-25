@@ -18,7 +18,21 @@ export const UserService = {
     // create user
     async StoreUser(data: StoreUserRequest): Promise<ResponsoUserStore> {
         try {
-            const response = await axios.post('/panel/users', data, {
+            const formData = new FormData();
+
+            formData.append('name', data.name);
+            formData.append('username', data.username);
+            if (data.photo) {
+                formData.append('photo', data.photo);
+            }
+            formData.append('email', data.email);
+            if (data.password) {
+                formData.append('password', data.password);
+            }
+            formData.append('local_id', data.local_id.toString());
+            formData.append('role', data.role);
+
+            const response = await axios.post('/panel/users', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -53,7 +67,28 @@ export const UserService = {
     // update user
     async updateUser(id: number, data: UpdateUserRequest): Promise<ResponseUpdateUser> {
         try {
-            const response = await axios.put(`/panel/users/${id}`, data);
+            const formData = new FormData();
+            formData.append('name', data.name);
+            formData.append('username', data.username);
+            if (data.photo) {
+                formData.append('photo', data.photo);
+            }
+            if (data.password) {
+                formData.append('password', data.password);
+            }
+            formData.append('email', data.email);
+            if (data.local_id !== null) {
+                formData.append('local_id', data.local_id.toString());
+            }
+            formData.append('role', data.role);
+            formData.append('status', data.status ? '1' : '0');
+            formData.append('_method', 'PUT');
+            const response = await axios.post(`/panel/users/${id}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Accept: 'application/json',
+                },
+            });
             return response.data;
         } catch (error) {
             if (axios.isAxiosError(error)) {
