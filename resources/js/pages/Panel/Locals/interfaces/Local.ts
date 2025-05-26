@@ -1,10 +1,13 @@
 import { Pagination } from '@/interfaces/paginacion';
 
-export interface LocalResource {
-    id: number;
+export interface LocalBase {
     name: string;
-    address: string | null;
+    address?: string | null;
     status: boolean;
+}
+
+export interface LocalResource extends LocalBase {
+    id: number;
 }
 
 export interface LocalTable {
@@ -13,16 +16,10 @@ export interface LocalTable {
     pagination: Pagination;
 }
 
-export interface storeLocalRequest {
-    name: string;
-    address?: string | null;
-    status: boolean;
-}
+export interface storeLocalRequest extends LocalBase {}
 
-export interface updateLocalRequest {
-    name: string;
-    address?: string | null;
-    status: boolean;
+export interface updateLocalRequest extends LocalBase {
+    id: number;
 }
 
 export interface ResponseLocalStore {
@@ -40,4 +37,9 @@ export interface ResponseLocalUpdate {
 export interface ResponseLocalDelete {
     success: boolean;
     message: string;
+}
+
+export interface ResponseLocalGetId {
+    success: boolean;
+    local: LocalResource;
 }

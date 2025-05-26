@@ -1,6 +1,6 @@
 <template>
     <div class="flex w-full items-center">
-        <Button>Nuevo local</Button>
+        <Button @click="openCreateModal">Nuevo local</Button>
         <div class="relative ml-auto w-full max-w-sm">
             <Input id="search" type="text" v-model="searchText" placeholder="Buscar..." class="w-full pl-10" />
             <span class="absolute inset-y-0 start-0 flex items-center px-3">
@@ -19,6 +19,7 @@ import { onUnmounted, ref, watch } from 'vue';
 
 const emit = defineEmits<{
     (e: 'search', value: string): void;
+    (e: 'open-modal-create'): void;
 }>();
 
 const searchText = ref('');
@@ -35,6 +36,10 @@ onUnmounted(() => {
 watch(searchText, (newValue) => {
     emitSearch(newValue);
 });
+
+const openCreateModal = () => {
+    emit('open-modal-create');
+};
 </script>
 
 <style scoped></style>

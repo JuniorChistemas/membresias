@@ -4,7 +4,7 @@ import { LocalService } from '@/services/LocalService';
 import { showErrorMessage, showSuccessMessage } from '@/utils/messages';
 import { reactive, toRefs } from 'vue';
 
-type ModalType = 'create' | 'edit' | 'delete';
+type ModalType = 'createEdit' | 'delete';
 
 export const useLocal = () => {
     // State
@@ -12,12 +12,16 @@ export const useLocal = () => {
         locals: [] as LocalResource[],
         local: null as LocalResource | null,
         search: '',
-        pagination: undefined as Pagination | undefined,
+        pagination: {
+            current_page: 1,
+            last_page: 1,
+            total: 0,
+            per_page: 10,
+        } as Pagination,
         loading: false,
         message: '',
         modals: {
-            create: false,
-            edit: false,
+            createEdit: false,
             delete: false,
         },
     });
@@ -39,9 +43,14 @@ export const useLocal = () => {
         state.message = errorMessage;
         showErrorMessage('Error', errorMessage);
     };
-
+    const openModal = (modalType: ModalType) => {
+        state.modals[modalType] = true;
+    };
     const closeModal = (modalType: ModalType) => {
         state.modals[modalType] = false;
+        if (modalType === 'createEdit') {
+            state.local = null;
+        }
     };
 
     const refreshLocals = async () => {
@@ -68,7 +77,7 @@ export const useLocal = () => {
         try {
             const response = await LocalService.storeLocal(localData);
             if (handleApiResponse(response, 'Local creado exitosamente')) {
-                closeModal('create');
+                closeModal('createEdit');
                 await refreshLocals();
             }
         } catch (error) {
@@ -91,12 +100,13 @@ export const useLocal = () => {
     const getLocalById = async (id: number) => {
         try {
             const response = await LocalService.getLocalById(id);
-            // response is LocalResource, not an object with success/local
-            state.local = response;
-            state.modals.edit = true;
+            if (response.success) {
+                state.local = response.local;
+                openModal('createEdit');
+            }
         } catch (error) {
             handleApiError(error, 'Error al cargar local');
-            closeModal('edit');
+            closeModal('createEdit');
         }
     };
 
@@ -104,7 +114,7 @@ export const useLocal = () => {
         try {
             const response = await LocalService.updateLocal(id, localData);
             if (handleApiResponse(response, 'Local actualizado exitosamente')) {
-                closeModal('edit');
+                closeModal('createEdit');
                 await refreshLocals();
             }
         } catch (error) {
@@ -119,5 +129,7 @@ export const useLocal = () => {
         deleteLocal,
         getLocalById,
         updateLocal,
+        openModal,
+        closeModal,
     };
 };
