@@ -60,14 +60,4 @@ const handlePageChange = (page: number) => {
     emit('page-change', page);
 };
 </script>
-<style scoped>
-:hover {
-    cursor: pointer;
-    background-color: var(--background-color);
-    color: var(--text-color);
-}
-:active {
-    background-color: var(--background-color);
-    color: var(--text-color);
-}
-</style>
+<style scoped></style>

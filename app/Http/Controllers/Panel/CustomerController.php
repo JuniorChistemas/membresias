@@ -16,9 +16,15 @@ class CustomerController extends Controller
      * Display a listing of the resource.
      */
 
-    public function listCustomers()
+    public function listCustomers(Request $request)
     {
-        $customers = Customer::orderBy('id', 'asc')->paginate(10);
+        $search = $request->input('search', '');
+        $customers = Customer::when($search, function ($query) use ($search) {
+            $query->where('first_name', 'like', '%' . $search . '%')
+                ->orWhere('last_name', 'like', '%' . $search . '%')
+                ->orwhere('code', 'like', '%' . $search . '%');
+        })->orderBy('id', 'asc')->paginate(10);
+
         return response()->json([
             'success' => true,
             'customers' => CustomerResource::collection($customers),
@@ -36,7 +42,7 @@ class CustomerController extends Controller
 
     public function index()
     {
-        return Inertia::render('Panel/Customers/indexCustomer');
+        return Inertia::render('Panel/Customers/indexCustomers');
     }
     /**
      * Store a newly created resource in storage.
@@ -46,7 +52,7 @@ class CustomerController extends Controller
         $customer = Customer::create($request->validated());
         return response()->json([
             'success' => true,
-            'message' => 'Customer created successfully',
+            'message' => 'Cliente creado exitosamente',
             'customer' => new CustomerResource($customer),
         ]);
     }
@@ -70,7 +76,7 @@ class CustomerController extends Controller
         $customer->update($request->validated());
         return response()->json([
             'success' => true,
-            'message' => 'Customer updated successfully',
+            'message' => 'Cliente actualizado exitosamente',
             'customer' => new CustomerResource($customer),
         ]);
     }

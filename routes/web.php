@@ -28,7 +28,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // end module locals
         // module customers
         Route::resource('customers', CustomerController::class)->except(['create', 'edit']);
-        Route::get('list-customers', [\App\Http\Controllers\Panel\CustomerController::class, 'listCustomers'])->name('list-customers');
+        Route::get('list-customers', [CustomerController::class, 'listCustomers'])->name('list-customers');
         // end module customers
     });
 });

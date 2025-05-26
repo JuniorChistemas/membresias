@@ -15,9 +15,12 @@ class LocalController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function listLocals()
+    public function listLocals(Request $request)
     {
-        $locals = Local::orderBy('id', 'asc')->paginate(10);
+        $search = $request->input('search', '');
+        $locals = Local::when($search, function ($query) use ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        })->orderBy('id', 'asc')->paginate(10);
         return response()->json([
             'success' => true,
             'locals' => LocalResource::collection($locals),
@@ -32,12 +35,9 @@ class LocalController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function index()
     {
-        //
+        return Inertia::render('Panel/Locals/indexLocals');
     }
 
     /**
@@ -64,13 +64,6 @@ class LocalController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
