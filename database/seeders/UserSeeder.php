@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
         $admin_1->assignRole($adminRole);
         $admin_2->assignRole($personalRole);
 
-        User::factory()->count(100)->create()->each(function ($user) use ($personalRole) {
+        User::factory()->count(10)->create()->each(function ($user) use ($personalRole) {
             $user->assignRole($personalRole);
         });
     }

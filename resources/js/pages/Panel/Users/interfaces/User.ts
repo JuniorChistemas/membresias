@@ -8,6 +8,7 @@ export interface UserResource {
     email: string;
     local: string;
     status: boolean;
+    role: 'administrador' | 'personal';
 }
 
 export interface UsersTable {
@@ -26,6 +27,17 @@ export interface StoreUserRequest {
     role: 'administrador' | 'personal';
 }
 
+export interface UpdateUserRequest {
+    name: string;
+    username: string;
+    photo: File | null;
+    password: string | null;
+    email: string;
+    local_id: number | null;
+    role: 'administrador' | 'personal';
+    status: boolean;
+}
+
 export interface ResponsoUserStore {
     success: boolean;
     message: string;
@@ -35,4 +47,15 @@ export interface ResponsoUserStore {
 export interface ResponseUserDelete {
     success: boolean;
     message: string;
+}
+
+export interface ResponseUpdateUser {
+    success: boolean;
+    message: string;
+    user: UserResource;
+}
+
+export interface UserId {
+    success: string;
+    user: UserResource;
 }

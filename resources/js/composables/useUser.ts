@@ -1,7 +1,7 @@
 import { Pagination } from '@/interfaces/paginacion';
-import { StoreUserRequest, UserResource } from '@/pages/Panel/Users/interfaces/User';
+import { StoreUserRequest, UpdateUserRequest, UserResource } from '@/pages/Panel/Users/interfaces/User';
 import { UserService } from '@/services/UserService';
-import { showSuccessMessage } from '@/utils/messages';
+import { showErrorMessage, showSuccessMessage } from '@/utils/messages';
 import { reactive, ref } from 'vue';
 
 export const useUser = () => {
@@ -10,6 +10,8 @@ export const useUser = () => {
         pagination: Pagination;
         filter: string;
         loading: boolean;
+        userId: UserResource;
+        isEdit: boolean;
     }>({
         usersList: [],
         pagination: {
@@ -22,6 +24,17 @@ export const useUser = () => {
         },
         filter: '',
         loading: false,
+        userId: {
+            id: 0,
+            name: '',
+            username: '',
+            photo: '',
+            email: '',
+            local: '',
+            role: 'administrador',
+            status: false,
+        },
+        isEdit: false,
     });
     const message = ref<string>('');
     const getUsersData = async (page: number = 1, name: string = '') => {
@@ -49,10 +62,14 @@ export const useUser = () => {
                 window.location.href = response.redirect_url;
             }
         } catch (error) {
-            console.error('Error storing user:', error);
-            message.value = 'Error storing user';
+            if (typeof error === 'object' && error !== null) {
+                const errorMessage = (error as Error).message;
+                message.value = errorMessage;
+                showErrorMessage('Error', errorMessage);
+            }
         }
     };
+
     const deleteUser = async (id: number) => {
         try {
             principal.loading = true;
@@ -71,10 +88,41 @@ export const useUser = () => {
         }
     };
 
+    const getUserById = async (id: number) => {
+        try {
+            const response = await UserService.getUserById(id);
+            if (response.success) {
+                principal.isEdit = true;
+                principal.userId = response.user;
+            }
+        } catch (error) {
+            console.error('Error fetching user by ID:', error);
+        }
+    };
+    const updateUser = async (id: number, user: UpdateUserRequest) => {
+        try {
+            const response = await UserService.updateUser(id, user);
+            if (response.success) {
+                message.value = response.message;
+                principal.isEdit = false;
+                showSuccessMessage('Success', response.message);
+                getUsersData(principal.pagination.current_page);
+            }
+        } catch (error) {
+            if (typeof error === 'object' && error !== null) {
+                const errorMessage = (error as Error).message;
+                message.value = errorMessage;
+                showErrorMessage('Error', errorMessage);
+            }
+        }
+    };
+
     return {
         principal,
         getUsersData,
         storeUser,
         deleteUser,
+        getUserById,
+        updateUser,
     };
 };

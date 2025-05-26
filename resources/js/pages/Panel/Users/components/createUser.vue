@@ -220,15 +220,12 @@ const onSubmit = handleSubmit((values) => {
     console.log('Datos del usuario:', userData);
     storeUser(userData)
         .then(() => {
-            // Redirigir o mostrar un mensaje de éxito
             console.log('Usuario creado con éxito');
         })
         .catch((error) => {
             // Manejar errores
             console.error('Error al crear el usuario:', error);
         });
-    // Aquí puedes llamar a tu función para crear el usuario
-    // Por ejemplo: storeUser(userData);
 });
 </script>
 

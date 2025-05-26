@@ -13,6 +13,12 @@
                         @open-modal-delete="handleOpenModalDelete"
                     />
                 </div>
+                <UpdateUser
+                    :user="principal.userId"
+                    :open="principal.isEdit"
+                    @close-modal="() => (principal.isEdit = false)"
+                    @update-user="dataUpdateUser"
+                />
             </div>
         </div>
     </AppLayout>
@@ -24,8 +30,10 @@ import { BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
 import { onMounted } from 'vue';
 import TableUser from './components/tableUser.vue';
+import UpdateUser from './components/updateUser.vue';
+import { UpdateUserRequest } from './interfaces/User';
 
-const { principal, getUsersData, deleteUser } = useUser();
+const { principal, getUsersData, deleteUser, getUserById, updateUser } = useUser();
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -43,12 +51,19 @@ const handlePageChange = (page: number) => {
     getUsersData(page);
 };
 const handleOpenModalUpdate = (user_id: number) => {
+    getUserById(user_id);
     console.log('update: ' + user_id);
 };
 const handleOpenModalDelete = (user_id: number) => {
     deleteUser(user_id);
     console.log('delete: ' + user_id);
 };
+
+const dataUpdateUser = (data: UpdateUserRequest, id: number) => {
+    console.log('dataUpdatePayment', data);
+    updateUser(id, data);
+};
+
 onMounted(() => {
     getUsersData();
 });
