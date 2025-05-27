@@ -43,7 +43,6 @@ export const useCustomer = () => {
         state.message = errorMessage;
         showErrorMessage('Error', errorMessage);
     };
-
     const openModal = (modalType: ModalType) => {
         state.modals[modalType] = true;
         if (modalType === 'createEdit') {

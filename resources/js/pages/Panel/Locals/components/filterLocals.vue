@@ -36,7 +36,6 @@ onUnmounted(() => {
 watch(searchText, (newValue) => {
     emitSearch(newValue);
 });
-
 const openCreateModal = () => {
     emit('open-modal-create');
 };

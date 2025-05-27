@@ -9,7 +9,6 @@ export interface LocalBase {
 export interface LocalResource extends LocalBase {
     id: number;
 }
-
 export interface LocalTable {
     success: boolean;
     locals: LocalResource[];
@@ -38,7 +37,6 @@ export interface ResponseLocalDelete {
     success: boolean;
     message: string;
 }
-
 export interface ResponseLocalGetId {
     success: boolean;
     local: LocalResource;

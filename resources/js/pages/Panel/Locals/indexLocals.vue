@@ -59,7 +59,6 @@ const handleOpenModalCreate = () => {
 const handleCloseModalCreate = () => {
     closeModal('createEdit');
 };
-
 const handlePageChange = (page: number) => {
     getLocals(page);
 };
