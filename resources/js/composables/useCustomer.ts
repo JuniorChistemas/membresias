@@ -4,7 +4,7 @@ import { CustomerService } from '@/services/CustomerService';
 import { showErrorMessage, showSuccessMessage } from '@/utils/messages';
 import { reactive, toRefs } from 'vue';
 
-type ModalType = 'create' | 'edit' | 'delete';
+type ModalType = 'createEdit' | 'delete';
 
 export const useCustomer = () => {
     // State
@@ -21,8 +21,7 @@ export const useCustomer = () => {
         loading: false,
         message: '',
         modals: {
-            create: false,
-            edit: false,
+            createEdit: false,
             delete: false,
         },
     });
@@ -44,9 +43,18 @@ export const useCustomer = () => {
         state.message = errorMessage;
         showErrorMessage('Error', errorMessage);
     };
+    const openModal = (modalType: ModalType) => {
+        state.modals[modalType] = true;
+        if (modalType === 'createEdit') {
+            state.customer = null;
+        }
+    };
 
     const closeModal = (modalType: ModalType) => {
         state.modals[modalType] = false;
+        if (modalType === 'createEdit') {
+            state.customer = null;
+        }
     };
 
     const refreshCustomers = async () => {
@@ -73,7 +81,7 @@ export const useCustomer = () => {
         try {
             const response = await CustomerService.storeCustomer(customerData);
             if (handleApiResponse(response, 'Cliente creado exitosamente')) {
-                closeModal('create');
+                closeModal('createEdit');
                 await refreshCustomers();
             }
         } catch (error) {
@@ -98,11 +106,11 @@ export const useCustomer = () => {
             const response = await CustomerService.getCustomerById(id);
             if (response.success) {
                 state.customer = response.customer;
-                state.modals.edit = true;
+                state.modals.createEdit = true;
             }
         } catch (error) {
             handleApiError(error, 'Error al cargar cliente');
-            closeModal('edit');
+            closeModal('createEdit');
         }
     };
 
@@ -110,7 +118,7 @@ export const useCustomer = () => {
         try {
             const response = await CustomerService.updateCustomer(id, customerData);
             if (handleApiResponse(response, 'Cliente actualizado exitosamente')) {
-                closeModal('edit');
+                closeModal('createEdit');
                 await refreshCustomers();
             }
         } catch (error) {
@@ -125,5 +133,7 @@ export const useCustomer = () => {
         deleteCustomer,
         getCustomerById,
         updateCustomer,
+        openModal,
+        closeModal,
     };
 };

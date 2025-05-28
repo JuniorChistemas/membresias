@@ -216,7 +216,7 @@
 
 /* Table header sticky on vertical scroll (if needed) */
 .table-header-row {
-    @apply sticky top-0 bg-gray-100 dark:bg-gray-800/60;
+    @apply sticky top-0 bg-blue-100 dark:bg-gray-800/60;
 }
 
 /* Table head cells */

@@ -1,14 +1,17 @@
 import { Pagination } from '@/interfaces/paginacion';
 
-export interface CustomerResource {
-    id: number;
+export interface CustomerBase {
     first_name: string;
     last_name: string;
     code: string;
-    phone: string | null;
-    email: string | null;
-    address: string | null;
+    phone?: string | null;
+    email?: string | null;
+    address?: string | null;
     status: boolean;
+}
+
+export interface CustomerResource extends CustomerBase {
+    id: number;
 }
 
 export interface CustomerTable extends CustomerResource {
@@ -17,24 +20,12 @@ export interface CustomerTable extends CustomerResource {
     pagination: Pagination;
 }
 
-export interface storeCustomerRequest {
-    first_name: string;
-    last_name: string;
-    code: string;
-    phone?: string | null;
-    email?: string | null;
-    address?: string | null;
-    status: boolean;
+export interface storeCustomerRequest extends CustomerBase {}
+export interface updateCustomerRequest extends CustomerBase {
+    id: number;
 }
-export interface updateCustomerRequest {
-    first_name: string;
-    last_name: string;
-    code: string;
-    phone?: string | null;
-    email?: string | null;
-    address?: string | null;
-    status: boolean;
-}
+
+export type CustomerFormData = storeCustomerRequest | updateCustomerRequest;
 
 export interface ResponseCustomerStore {
     success: boolean;

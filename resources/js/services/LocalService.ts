@@ -1,7 +1,7 @@
 import {
-    LocalResource,
     LocalTable,
     ResponseLocalDelete,
+    ResponseLocalGetId,
     ResponseLocalStore,
     ResponseLocalUpdate,
     storeLocalRequest,
@@ -74,7 +74,7 @@ export const LocalService = {
     },
 
     // Get local by ID
-    async getLocalById(id: number): Promise<LocalResource> {
+    async getLocalById(id: number): Promise<ResponseLocalGetId> {
         try {
             const response = await axios.get(`/panel/locals/${id}`);
             return response.data;
