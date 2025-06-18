@@ -28,7 +28,7 @@ const showAvatar = computed(() => props.user.photo && props.user.photo !== '');
     </Avatar>
 
     <div class="grid flex-1 text-left text-sm leading-tight">
-        <span class="truncate font-medium">{{ user.name }}</span>
-        <span v-if="showEmail" class="text-muted-foreground truncate text-xs">{{ user.email }}</span>
+        <span class="truncate font-medium text-gray-900 dark:text-gray-100">{{ user.name }}</span>
+        <span v-if="showEmail" class="text-muted-foreground truncate text-xs dark:text-gray-400">{{ user.email }}</span>
     </div>
 </template>

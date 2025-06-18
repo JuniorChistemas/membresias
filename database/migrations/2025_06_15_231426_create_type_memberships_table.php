@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('locals', function (Blueprint $table) {
+        Schema::create('type_memberships', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('address')->nullable();
-            $table->boolean('status')->default(true);
             $table->timestamps();
+            $table->string('name');
+            $table->string('description')->nullable();
+            $table->decimal('price', 6, 2);
+            $table->boolean('status')->default(true);
         });
     }
 
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('locals');
+        Schema::dropIfExists('type_memberships');
     }
 };

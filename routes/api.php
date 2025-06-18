@@ -3,6 +3,7 @@
 use App\Http\Controllers\Panel\CustomerController;
 use App\Http\Controllers\Panel\LocalController;
 use App\Http\Controllers\Panel\UserController;
+use App\Http\Controllers\Panel\TypeMembershipController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +35,7 @@ Route::delete('/customers/{customer}', [CustomerController::class, 'destroy'])->
 
 
 # list locals 
-ROute::get(('/locals/list'), [LocalController::class, 'listLocals'])->name('api.local.list');
+Route::get(('/locals/list'), [LocalController::class, 'listLocals'])->name('api.local.list');
 # create local
 Route::post('/locals', [LocalController::class, 'store'])->name('api.local.store');
 # show local
@@ -43,3 +44,14 @@ Route::get('/locals/{local}', [LocalController::class, 'show'])->name('api.local
 Route::put('/locals/{local}', [LocalController::class, 'update'])->name('api.local.update');
 # delete local
 Route::delete('/locals/{local}', [LocalController::class, 'destroy'])->name('api.local.destroy');
+
+# list type memberships
+Route::get('/typeMemberships/list', [TypeMembershipController::class, 'listTypeMemberships'])->name('api.typeMembership.list');
+# create type membership
+Route::post('/typeMemberships', [TypeMembershipController::class, 'store'])->name('api.typeMembership.store');
+# show type membership
+Route::get('/typeMemberships/{typeMembership}', [TypeMembershipController::class, 'show'])->name('api.typeMembership.show');
+# update type membership
+Route::put('/typeMemberships/{typeMembership}', [TypeMembershipController::class, 'update'])->name('api.typeMembership.update');
+# delete type membership
+Route::delete('/typeMemberships/{typeMembership}', [TypeMembershipController::class, 'destroy'])->name('api.typeMembership.destroy');

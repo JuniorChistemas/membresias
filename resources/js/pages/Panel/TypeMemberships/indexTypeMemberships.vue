@@ -1,24 +1,21 @@
 <template>
-    <Head title="Clientes" />
+    <Head title="Tipo de membresias"/>
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
+       <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
             <div class="border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1 rounded-xl border md:min-h-min">
-                <div class="mt-4 mb-2 px-6">
-                    <Button @click="handleOpenModalCreate">Nuevo cliente</Button>
-                </div>
                 <div class="mb-4 px-6 py-2">
-                    <TableCustomers
-                        :customers="customers"
+                    <TableTypeMemberships
+                        :typeMemberships="typeMemberships"
                         :pagination="pagination"
                         :loading="loading"
                         @page-change="handlePageChange"
                         @open-modal-edit="handleOpenModalUpdate"
                         @open-modal-delete="handleOpenModalDelete"
                     />
-                    <ModalCustomers
+                    <ModalTypeMemberships
                         :status-modal="modals.createEdit"
                         @close-modal="handleCloseModalCreate"
-                        :customer="customer"
+                        :type-membership="typeMembership"
                         @create="handleCreate"
                         @update="handleUpdate"
                     />
@@ -29,15 +26,14 @@
 </template>
 
 <script setup lang="ts">
-import { useCustomer } from '@/composables/useCustomer';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
+import TableTypeMemberships from './components/tableTypeMemberships.vue';
+import ModalTypeMemberships from './components/modalTypeMemberships.vue';
+import { useTypeMembership } from '@/composables/useTypeMembership';
+import { storeTypeMembershipRequest, updateTypeMembershipRequest } from './interfaces/TypeMembership';
 import { onMounted } from 'vue';
-import ModalCustomers from './components/modalCustomers.vue';
-import TableCustomers from './components/tableCustomers.vue';
-import { storeCustomerRequest, updateCustomerRequest } from './interfaces/Customer';
-import Button from '@/components/ui/button/Button.vue';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -55,26 +51,26 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 const {
-    customers,
-    getCustomers,
+    typeMembership,
+    getTypeMemberships,
     pagination,
     loading,
-    deleteCustomer,
+    deleteTypeMembership,
     modals,
-    getCustomerById,
-    customer,
+    getTypeMembershipById,
+    typeMemberships,
     openModal,
     closeModal,
-    storeCustomer,
-    updateCustomer,
-} = useCustomer();
+    storeTypeMembership,
+    updateTypeMembership,
+} = useTypeMembership();
 
-// funtion to handle search
+// function to handle search
 const handleSearch = (searchText: string) => {
-    getCustomers(1, searchText);
+    getTypeMemberships(1, searchText);
 };
 
-// funtion to handle modal create
+//function to handle modal create
 const handleOpenModalCreate = () => {
     openModal('createEdit');
 };
@@ -83,29 +79,34 @@ const handleCloseModalCreate = () => {
     closeModal('createEdit');
 };
 
-// funtion to handle page change
+// function to handle page change
 const handlePageChange = (page: number) => {
-    getCustomers(page);
+    getTypeMemberships(page);
 };
 
-const handleOpenModalUpdate = (customer_id: number) => {
-    console.log('update: ' + customer_id);
-    getCustomerById(customer_id);
+const handleOpenModalUpdate = (typeMembership_id: number) => {
+    console.log('update: ' + typeMembership_id)
+    getTypeMembershipById(typeMembership_id);
 };
 
-const handleOpenModalDelete = (customer_id: number) => {
-    console.log('delete: ' + customer_id);
-    deleteCustomer(customer_id);
+const handleOpenModalDelete = (typeMembership_id: number) => {
+    console.log('delete: ' + typeMembership_id);
+    deleteTypeMembership(typeMembership_id);
 };
 
-const handleCreate = (data: storeCustomerRequest) => {
-    storeCustomer(data);
+const handleCreate = (data: storeTypeMembershipRequest) => {
+    storeTypeMembership(data);
 };
-const handleUpdate = (data: updateCustomerRequest) => {
-    updateCustomer(data.id, data);
+
+const handleUpdate = (data: updateTypeMembershipRequest) => {
+    updateTypeMembership(data);
 };
+
 onMounted(() => {
-    getCustomers();
+    getTypeMemberships();
 });
+
+
 </script>
-<style scoped></style>
+<style scoped>
+</style>

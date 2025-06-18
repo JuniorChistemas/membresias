@@ -2,7 +2,7 @@
     <div class="table-container">
         <LoadingTable v-if="loading" :headers="4" :row-count="10" />
         <div v-else class="table-content">
-            <div class="table-container">
+            <div class="overflow-hidden rounded-lg border border-gray-200 shadow-sm dark:border-gray-700 dark:shadow-none">
                 <Table class="table-responsive">
                     <TableHeader class="table-header-row">
                         <TableRow>

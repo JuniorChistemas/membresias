@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             LocalSeeder::class,
             UserSeeder::class,
             CustomerSeeder::class,
+            TypeMembershipSeeder::class,
         ]);
     }
 }

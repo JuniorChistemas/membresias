@@ -31,7 +31,7 @@
 
                 <FormField v-slot="{ componentField }" name="code">
                     <FormItem>
-                        <FormLabel>Código</FormLabel>
+                        <FormLabel>DNI</FormLabel>
                         <FormControl>
                             <Input id="code" type="text" v-bind="componentField" />
                         </FormControl>

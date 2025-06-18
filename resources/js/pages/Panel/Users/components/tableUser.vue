@@ -1,33 +1,33 @@
 <template>
     <div class="container mx-auto px-4 py-2">
         <LoadingTable v-if="loading" :headers="7" :row-count="10" />
-        <div v-else class="space-y-4">
+        <div v-else class="table-content">
             <div class="overflow-hidden rounded-lg border border-gray-200 shadow-sm dark:border-gray-700 dark:shadow-none">
-                <Table class="container">
-                    <TableHeader>
+                <Table class="table-responsive">
+                    <TableHeader class="table-header-row">
                         <TableRow>
-                            <TableHead>ID</TableHead>
-                            <TableHead>Foto</TableHead>
-                            <TableHead>Nombre</TableHead>
-                            <TableHead>Usuario</TableHead>
-                            <TableHead>Email</TableHead>
-                            <TableHead>Local</TableHead>
-                            <TableHead>Estado</TableHead>
-                            <TableHead>Acciones</TableHead>
+                            <TableHead class="table-head-id">ID</TableHead>
+                            <TableHead class="table-head">Foto</TableHead>
+                            <TableHead class="table-head">Nombre</TableHead>
+                            <TableHead class="table-head">Usuario</TableHead>
+                            <TableHead class="table-head">Email</TableHead>
+                            <TableHead class="table-head">Local</TableHead>
+                            <TableHead class="table-head">Estado</TableHead>
+                            <TableHead class="table-head">Acciones</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody class="cursor-pointer">
                         <TableRow v-for="user in props.usersList" :key="user.id">
-                            <TableCell>{{ user.id }}</TableCell>
-                            <TableCell>
+                            <TableCell class="cell-id">{{ user.id }}</TableCell>
+                            <TableCell class="cell-data">
                                 <img v-if="user.photo" :src="user.photo" alt="Foto no" class="h-10 w-10 rounded-full object-cover" />
                                 <span v-else>Sin foto</span>
                             </TableCell>
-                            <TableCell>{{ user.name }}</TableCell>
-                            <TableCell>{{ user.username }}</TableCell>
-                            <TableCell>{{ user.email }}</TableCell>
-                            <TableCell>{{ user.local }}</TableCell>
-                            <TableCell>
+                            <TableCell class="cell-data">{{ user.name }}</TableCell>
+                            <TableCell class="cell-data">{{ user.username }}</TableCell>
+                            <TableCell class="cell-data">{{ user.email }}</TableCell>
+                            <TableCell class="cell-data">{{ user.local }}</TableCell>
+                            <TableCell class="cell-data">
                                 <span
                                     v-if="user.status === true"
                                     class="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800 dark:bg-green-900/30 dark:text-green-200"
@@ -42,7 +42,7 @@
                                     Inactivo
                                 </span>
                             </TableCell>
-                            <TableCell>
+                            <TableCell class="cell-actions">
                                 <Button
                                     @click="openModalUpdate(user.id)"
                                     variant="ghost"

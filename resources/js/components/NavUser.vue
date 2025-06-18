@@ -17,9 +17,11 @@ const { isMobile, state } = useSidebar();
         <SidebarMenuItem>
             <DropdownMenu>
                 <DropdownMenuTrigger as-child>
-                    <SidebarMenuButton size="lg" class="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
+                    <SidebarMenuButton size="lg"
+  class="transition-all duration-150 hover:bg-gray-200 hover:shadow-sm dark:hover:bg-gray-700/70 dark:hover:text-white"
+>
                         <UserInfo :user="user" />
-                        <ChevronsUpDown class="ml-auto size-4" />
+                        <ChevronsUpDown class="ml-auto size-4 text-gray-600 dark:text-gray-100" />
                     </SidebarMenuButton>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent 
