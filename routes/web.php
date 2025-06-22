@@ -6,6 +6,7 @@ use App\Http\Controllers\Panel\UserController;
 use App\Http\Controllers\Panel\TypeMembershipController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\Reportes\LocalPDFController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -38,6 +39,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // module type memberships
         Route::resource('typeMemberships', TypeMembershipController::class)->except(['create', 'edit']);
         Route::get('list-typeMemberships', [TypeMembershipController::class, 'listTypeMemberships'])->name('list-typeMemberships');
+
+        Route::prefix('reports')->name('reports.')->group(function(){
+
+            #Exports to Excel
+            Route::get('/export-excel-locals', [LocalController::class, 'exportExcel'])->name('locals.excel');
+
+            #Excel imports
+            Route::post('/import-excel-locals', [LocalController::class, 'importExcel'])->name('locals.import');
+
+            #Exports to PDF
+            Route::get('/export-pdf-locals', [LocalPDFController::class, 'exportPDF']);
+        });
     });
 });
 

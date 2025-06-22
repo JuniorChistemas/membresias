@@ -9,6 +9,9 @@ use App\Http\Resources\LocalResource;
 use App\Models\Local;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\LocalsExport;
+use App\Imports\LocalImport;
 
 class LocalController extends Controller
 {
@@ -89,6 +92,26 @@ class LocalController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Local deleted successfully',
+        ]);
+    }
+
+    // EXPORTAR A EXCEL
+    public function exportExcel()
+    {
+        return Excel::download(new LocalsExport, 'locals.xlsx');
+    }
+
+    // IMPORTAR EXCEL
+    public function importExcel(Request $request)
+    {
+        $request->validate([
+            'archivo' => 'required|file|mimes:xlsx,xls,csv'
+        ]);
+    
+        Excel::import(new LocalImport, $request->file('archivo'));
+    
+        return response()->json([
+            'message' => 'Importación de tipos de cliente realizado correctamente.'
         ]);
     }
 }
