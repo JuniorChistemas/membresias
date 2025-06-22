@@ -19,8 +19,10 @@ class LocalController extends Controller
     {
         $search = $request->input('search', '');
         $locals = Local::when($search, function ($query) use ($search) {
-            $query->where('name', 'like', '%' . $search . '%');
+            $query->where('name', 'like', '%' . $search . '%')
+                ->orWhere('status', 'like', '%' . $search . '%');
         })->orderBy('id', 'asc')->paginate(10);
+
         return response()->json([
             'success' => true,
             'locals' => LocalResource::collection($locals),
