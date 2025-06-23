@@ -9,6 +9,9 @@ use App\Http\Resources\TypeMembershipResource;
 use App\Models\TypeMembership;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\TypeMembershipsExport;
+use App\Imports\TypeMembershipsImport;
 
 class TypeMembershipController extends Controller
 {
@@ -89,6 +92,27 @@ class TypeMembershipController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Tipo de membresía eliminado exitosamente',
+        ]);
+    }
+
+    //EXPORT EXCEL
+    public function exportExcel()
+    {
+        return Excel::download(new TypeMembershipsExport, 'type_memberships.xlsx');
+    }
+
+    //IMPORT EXCEL
+    public function importExcel(Request $request)
+    {
+        $request->validate([
+            'archivo' => 'required|file|mimes:xlsx,xls,csv'
+        ]);
+
+        Excel::import(new TypeMembershipsImport, $request->file('archivo'));
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Importación de tipo de membresias realizado correctamente.',
         ]);
     }
 }

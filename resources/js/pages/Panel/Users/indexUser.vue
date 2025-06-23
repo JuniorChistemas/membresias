@@ -4,7 +4,12 @@
         <div class="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
             <div class="border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1 rounded-xl border md:min-h-min">
                 
-                
+                <!-- Titulo y descripción del modulo -->
+                <div class="px-6 pt-4 pb-1 mb-4">
+                    <CardTitle class="text-2xl">Registro de usuarios</CardTitle>
+                    <CardDescription class="text-base">Visualiza, crea y gestiona los usuarios del sistema.</CardDescription>
+                </div>
+
                 <div class="mt-4 mb-4 flex items-center justify-between px-6">
                     <TableUser
                         :users-list="principal.usersList"
@@ -34,6 +39,8 @@ import { onMounted } from 'vue';
 import TableUser from './components/tableUser.vue';
 import UpdateUser from './components/updateUser.vue';
 import { UpdateUserRequest } from './interfaces/User';
+import CardTitle from '@/components/ui/card/CardTitle.vue';
+import CardDescription from '@/components/ui/card/CardDescription.vue';
 
 const { principal, getUsersData, deleteUser, getUserById, updateUser } = useUser();
 

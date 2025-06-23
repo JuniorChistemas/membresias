@@ -58,16 +58,8 @@ import ToolsCustomers from './components/toolsCustomers.vue';
 import FilterCustomers from '../../../components/filter.vue';
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Exportar PDF',
-        href: '#',
-    },
-    {
-        title: 'Exportar Excel',
-        href: '#',
-    },
-    {
-        title: 'Importar CSV',
-        href: '#',
+        title: 'Clientes',
+        href: '/panel/customers',
     },
 ];
 
