@@ -111,7 +111,7 @@ class LocalController extends Controller
         Excel::import(new LocalImport, $request->file('archivo'));
     
         return response()->json([
-            'message' => 'Importación de tipos de cliente realizado correctamente.'
+            'message' => 'Importación de locales realizado correctamente.'
         ]);
     }
 }

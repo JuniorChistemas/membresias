@@ -9,6 +9,9 @@ use App\Http\Resources\CustomerResource;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CustomersExport;
+use App\Imports\CustomerImport;
 
 class CustomerController extends Controller
 {
@@ -92,4 +95,25 @@ class CustomerController extends Controller
             'message' => 'Customer deleted successfully',
         ]);
     }
+    
+    //EXPORT EXCEL
+    public function exportExcel()
+    {
+        return Excel::download(new CustomersExport, 'customers.xlsx');
+    }
+
+    //IMPORT EXCEL
+    public function importExcel(Request $request)
+    {
+        $request->validate([
+            'archivo' => 'required|file|mimes:xlsx,xls,csv'
+        ]);
+
+        Excel::import(new CustomerImport, $request->file('archivo'));
+
+        return response()->json([
+            'message' => 'Importacion de clientes realizado correctamente.',
+        ]);
+    }
+
 }

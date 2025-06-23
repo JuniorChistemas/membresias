@@ -39,7 +39,7 @@ class LocalPDFController extends Controller
                 <td style="width:20%;"></td>
             </tr>
         </table>
-        <div style="width:100%; text-align:center; font-size:13px; color:#555; margin-bottom:12px;">
+        <div style="width:100%; text-align:center; font-size:14px; color:#555; margin-bottom:12px;">
             Reporte detallado de todos los locales registrados en el sistema.
         </div>
         <table border="1" cellpadding="6" cellspacing="0" style="width:100%; border-collapse:collapse; font-size:12px; table-layout:fixed;">

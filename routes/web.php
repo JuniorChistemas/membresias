@@ -7,6 +7,7 @@ use App\Http\Controllers\Panel\TypeMembershipController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Reportes\LocalPDFController;
+use App\Http\Controllers\Reportes\CustomerPDFController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -44,12 +45,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
             #Exports to Excel
             Route::get('/export-excel-locals', [LocalController::class, 'exportExcel'])->name('locals.excel');
+            Route::get('/export-excel-customers', [CustomerController::class, 'exportExcel'])->name('customers.excel');
 
             #Excel imports
             Route::post('/import-excel-locals', [LocalController::class, 'importExcel'])->name('locals.import');
+            Route::post('/import-excel-customers', [CustomerController::class, 'importExcel'])->name('customers.import');
 
             #Exports to PDF
             Route::get('/export-pdf-locals', [LocalPDFController::class, 'exportPDF']);
+            Route::get('/export-pdf-customers', [CustomerPDFController::class, 'exportPDF'])->name('customers.pdf');
         });
     });
 });

@@ -2,12 +2,12 @@
 
 namespace App\Imports;
 
-use App\Models\Local;
+use App\Models\Customer;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class LocalImport implements ToCollection, WithHeadingRow
+class CustomerImport implements ToCollection, WithHeadingRow
 {
     /**
     * @param array $row
@@ -16,9 +16,13 @@ class LocalImport implements ToCollection, WithHeadingRow
     */
     public function collection(Collection $collection)
     {
-        foreach ($collection as $row) {
-            Local::create([
-                'name' => $row['nombre'],
+        foreach ($collection as $row){
+            Customer::create([
+                'first_name' => $row['nombre'],
+                'last_name' => $row['apellido'],
+                'code' => $row['codigo'],
+                'email' => $row['correo'],
+                'phone' => $row['telefono'],
                 'address' => $row['direccion'],
                 'status' => strtolower($row['estado']) === 'activo' ? true : false,
             ]);
