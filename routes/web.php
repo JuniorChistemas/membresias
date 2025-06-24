@@ -4,11 +4,13 @@ use App\Http\Controllers\Panel\CustomerController;
 use App\Http\Controllers\Panel\LocalController;
 use App\Http\Controllers\Panel\UserController;
 use App\Http\Controllers\Panel\TypeMembershipController;
+use App\Http\Controllers\Panel\PaymentMethodController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Reportes\LocalPDFController;
 use App\Http\Controllers\Reportes\CustomerPDFController;
 use App\Http\Controllers\Reportes\TypeMembershipPDFController;
+use App\Http\Controllers\Reportes\PaymentMethodPDFController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -42,22 +44,29 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('typeMemberships', TypeMembershipController::class)->except(['create', 'edit']);
         Route::get('list-typeMemberships', [TypeMembershipController::class, 'listTypeMemberships'])->name('list-typeMemberships');
 
+        // module payment methods
+        Route::resource('paymentMethods', PaymentMethodController::class)->except(['create', 'edit']);
+        Route::get('list-paymentMethods', [PaymentMethodController::class, 'listPaymentMethods'])->name('list-paymentMethods');
+
         Route::prefix('reports')->name('reports.')->group(function(){
 
             #Exports to Excel
             Route::get('/export-excel-locals', [LocalController::class, 'exportExcel'])->name('locals.excel');
             Route::get('/export-excel-customers', [CustomerController::class, 'exportExcel'])->name('customers.excel');
             Route::get('/export-excel-typeMemberships', [TypeMembershipController::class, 'exportExcel'])->name('typeMemberships.excel');
+            Route::get('/export-excel-paymentMethods', [PaymentMethodController::class, 'exportExcelPaymentMethods'])->name('paymentMethods.excel');
 
             #Excel imports
             Route::post('/import-excel-locals', [LocalController::class, 'importExcel'])->name('locals.import');
             Route::post('/import-excel-customers', [CustomerController::class, 'importExcel'])->name('customers.import');
             Route::post('/import-excel-typeMemberships', [TypeMembershipController::class, 'importExcel'])->name('typeMemberships.import');
+            Route::post('/import-excel-paymentMethods', [PaymentMethodController::class, 'importExcel'])->name('paymentMethods.import');
 
             #Exports to PDF
             Route::get('/export-pdf-locals', [LocalPDFController::class, 'exportPDF']);
             Route::get('/export-pdf-customers', [CustomerPDFController::class, 'exportPDF'])->name('customers.pdf');
             Route::get('/export-pdf-typeMemberships', [TypeMembershipPDFController::class, 'exportPDF'])->name('typeMemberships.pdf');
+            Route::get('/export-pdf-paymentMethods', [PaymentMethodPDFController::class, 'exportPDF'])->name('paymentMethods.pdf');
         });
     });
 });

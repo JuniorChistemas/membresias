@@ -107,9 +107,7 @@ class TypeMembershipController extends Controller
         $request->validate([
             'archivo' => 'required|file|mimes:xlsx,xls,csv'
         ]);
-
         Excel::import(new TypeMembershipsImport, $request->file('archivo'));
-
         return response()->json([
             'success' => true,
             'message' => 'Importación de tipo de membresias realizado correctamente.',

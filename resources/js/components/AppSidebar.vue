@@ -36,7 +36,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Método de pago',
-        href: '/dashboard',
+        href: '/panel/paymentMethods',
         icon: CreditCard,
     },
 ];
