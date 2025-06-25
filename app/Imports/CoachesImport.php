@@ -3,19 +3,29 @@
 namespace App\Imports;
 
 use App\Models\Coach;
-use Maatwebsite\Excel\Concerns\ToModel;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class CoachesImport implements ToModel
+class CoachesImport implements ToCollection, WithHeadingRow
 {
     /**
     * @param array $row
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
-    public function model(array $row)
+    public function collection(Collection $collection)
     {
-        return new Coach([
-            //
-        ]);
+        foreach ($collection as $row){
+            Coach::create([
+                'name' => $row['nombre'],
+                'dni' => $row['dni'],
+                'specialty' => $row['especialidad'],
+                'phone' => $row['telefono'],
+                'email' => $row['correo'],
+                'address' => $row['direccion'],
+                'status' => strtolower($row['estado']) === 'activo' ? true : false,
+            ]);
+        }
     }
 }

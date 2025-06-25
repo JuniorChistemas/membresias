@@ -7,7 +7,9 @@ import {
     storeCustomerRequest,
     updateCustomerRequest,
 } from '@/pages/Panel/Customers/interfaces/Customer';
+
 import axios, { AxiosError } from 'axios';
+
 type ValidationError = {
     errors: Record<string, string[]>;
     message: string;
@@ -17,6 +19,7 @@ type ApiError = {
     message: string;
     status?: number;
 };
+
 const handleApiError = (error: unknown): never => {
     if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError;

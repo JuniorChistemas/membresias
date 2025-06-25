@@ -41,7 +41,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Entrenadores',
-        href: '/dashboard',
+        href: '/panel/coaches',
         icon: Medal,
     },
     {

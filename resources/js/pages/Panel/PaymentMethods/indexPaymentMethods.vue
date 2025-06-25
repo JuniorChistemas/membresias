@@ -12,7 +12,7 @@
 
                     <!-- Boton de crear, filtro y exportaciones -->
                     <div class="flex flex-wrap justify-between items-center mb-4 px-6 mt-4 gap-2">
-                        <Button @click="handleOpenModalCreate">Nuevo tipo de membresia</Button>
+                        <Button @click="handleOpenModalCreate">Nuevo método de pago</Button>
                         <div class="flex items-center gap-2">
                             <FilterPaymentMethods @search="handleSearch" />
                             <ToolsPaymentMethods @import-success="getPaymentMethods" />

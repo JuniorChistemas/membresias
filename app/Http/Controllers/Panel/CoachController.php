@@ -43,7 +43,7 @@ class CoachController extends Controller
     
     public function index()
     {
-        return Intertia::render('Panel/Coaches/indexCoaches');
+        return Inertia::render('Panel/Coaches/indexCoaches');
     }
 
     public function store(StoreCoachRequest $request)
