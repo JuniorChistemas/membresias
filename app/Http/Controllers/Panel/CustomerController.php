@@ -92,14 +92,14 @@ class CustomerController extends Controller
         $customer->delete();
         return response()->json([
             'success' => true,
-            'message' => 'Customer deleted successfully',
+            'message' => 'Cliente eliminado exitosamente',
         ]);
     }
     
     //EXPORT EXCEL
     public function exportExcel()
     {
-        return Excel::download(new CustomersExport, 'customers.xlsx');
+        return Excel::download(new CustomersExport, 'Registro de clientes.xlsx');
     }
 
     //IMPORT EXCEL

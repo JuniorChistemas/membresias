@@ -97,7 +97,7 @@ class PaymentMethodController extends Controller
     //EXPORT EXCEL
     public function exportExcel()
     {
-        return Excel::download(new PaymentMethodsExport, 'payment_methods.xlsx');
+        return Excel::download(new PaymentMethodsExport, 'Registro de metodos de pago.xlsx');
     }
 
     //IMPORT EXCEL

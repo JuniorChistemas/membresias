@@ -9,7 +9,7 @@
                             <TableHead class="table-head-id">ID</TableHead>
                             <TableHead class="table-head">Nombre</TableHead>
                             <TableHead class="table-head">Apellido</TableHead>
-                            <TableHead class="table-head">Código</TableHead>
+                            <TableHead class="table-head">DNI</TableHead>
                             <TableHead class="table-head">Teléfono</TableHead>
                             <TableHead class="table-head">Email</TableHead>
                             <TableHead class="table-head">Dirección</TableHead>

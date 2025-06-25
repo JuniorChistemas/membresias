@@ -98,7 +98,7 @@ class LocalController extends Controller
     // EXPORTAR A EXCEL
     public function exportExcel()
     {
-        return Excel::download(new LocalsExport, 'locals.xlsx');
+        return Excel::download(new LocalsExport, 'Registro de locales.xlsx');
     }
 
     // IMPORTAR EXCEL

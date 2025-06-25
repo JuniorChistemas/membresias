@@ -98,7 +98,7 @@ class TypeMembershipController extends Controller
     //EXPORT EXCEL
     public function exportExcel()
     {
-        return Excel::download(new TypeMembershipsExport, 'type_memberships.xlsx');
+        return Excel::download(new TypeMembershipsExport, 'Registro de tipo de membresias.xlsx');
     }
 
     //IMPORT EXCEL

@@ -5,12 +5,14 @@ use App\Http\Controllers\Panel\LocalController;
 use App\Http\Controllers\Panel\UserController;
 use App\Http\Controllers\Panel\TypeMembershipController;
 use App\Http\Controllers\Panel\PaymentMethodController;
+use App\Http\Controllers\Panel\CoachController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Reportes\LocalPDFController;
 use App\Http\Controllers\Reportes\CustomerPDFController;
 use App\Http\Controllers\Reportes\TypeMembershipPDFController;
 use App\Http\Controllers\Reportes\PaymentMethodPDFController;
+use App\Http\Controllers\Reportes\CoachPDFController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -48,6 +50,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('paymentMethods', PaymentMethodController::class)->except(['create', 'edit']);
         Route::get('list-paymentMethods', [PaymentMethodController::class, 'listPaymentMethods'])->name('list-paymentMethods');
 
+        // module coaches
+        Route::resource('coaches', CoachController::class)->except(['create', 'edit']);
+        Route::get('list-coaches', [CoachController::class, 'listCoaches'])->name('list-coaches');
+
         Route::prefix('reports')->name('reports.')->group(function(){
 
             #Exports to Excel
@@ -55,18 +61,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/export-excel-customers', [CustomerController::class, 'exportExcel'])->name('customers.excel');
             Route::get('/export-excel-typeMemberships', [TypeMembershipController::class, 'exportExcel'])->name('typeMemberships.excel');
             Route::get('/export-excel-paymentMethods', [PaymentMethodController::class, 'exportExcelPaymentMethods'])->name('paymentMethods.excel');
+            Route::get('/export-excel-coaches', [CoachController::class, 'exportExcel'])->name('coaches.excel');
 
             #Excel imports
             Route::post('/import-excel-locals', [LocalController::class, 'importExcel'])->name('locals.import');
             Route::post('/import-excel-customers', [CustomerController::class, 'importExcel'])->name('customers.import');
             Route::post('/import-excel-typeMemberships', [TypeMembershipController::class, 'importExcel'])->name('typeMemberships.import');
             Route::post('/import-excel-paymentMethods', [PaymentMethodController::class, 'importExcel'])->name('paymentMethods.import');
+            Route::post('/import-excel-coaches', [CoachController::class, 'importExcel'])->name('coaches.import');
 
             #Exports to PDF
             Route::get('/export-pdf-locals', [LocalPDFController::class, 'exportPDF']);
             Route::get('/export-pdf-customers', [CustomerPDFController::class, 'exportPDF'])->name('customers.pdf');
             Route::get('/export-pdf-typeMemberships', [TypeMembershipPDFController::class, 'exportPDF'])->name('typeMemberships.pdf');
             Route::get('/export-pdf-paymentMethods', [PaymentMethodPDFController::class, 'exportPDF'])->name('paymentMethods.pdf');
+            Route::get('/export-pdf-coaches', [CoachPDFController::class, 'exportPDF'])->name('coaches.pdf');
         });
     });
 });
