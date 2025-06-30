@@ -58,6 +58,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // module daily session logs
         Route::resource('dailySessionLogs', DailySessionLogController::class)->except(['create', 'edit']);
         Route::get('list-dailySessionLogs', [DailySessionLogController::class, 'listDailySessionLogs'])->name('list-dailySessionLogs');
+        Route::get('paymentMethods-all', [PaymentMethodController::class, 'getAll'])->name('paymentMethods.all');
 
         Route::prefix('reports')->name('reports.')->group(function(){
 

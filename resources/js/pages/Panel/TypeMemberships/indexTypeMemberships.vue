@@ -112,7 +112,7 @@ const handleCreate = (data: storeTypeMembershipRequest) => {
 };
 
 const handleUpdate = (data: updateTypeMembershipRequest) => {
-    updateTypeMembership(data);
+    updateTypeMembership(data.id, data);
 };
 
 onMounted(() => {

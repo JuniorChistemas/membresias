@@ -40,6 +40,17 @@ class PaymentMethodController extends Controller
             ],
         ]);
     }
+
+    public function getAll()
+    {
+        $methods = PaymentMethod::orderBy('id')->get();
+
+        return response()->json([
+            'success' => true,
+            'paymentMethods' => PaymentMethodResource::collection($methods),
+        ]);
+    }
+
     public function index()
     {
         return Inertia::render('Panel/PaymentMethods/indexPaymentMethods');

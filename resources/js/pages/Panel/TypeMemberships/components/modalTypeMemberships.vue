@@ -143,18 +143,18 @@ const submitForm = handleSubmit((values: TypeMembershipFormData) => {
 });
 
 watch(
-    () => props.typeMembership,
-    (newValue) => {
-        if (newValue) {
-            setValues({
-                name: newValue.name,
-                description: newValue.description,
-                price: newValue.price || 0,
-                status: newValue.status || false,
-            });
-        }
+  () => props.typeMembership,
+  (newValue) => {
+    if (newValue) {
+      setValues({
+        name: newValue.name ?? '',
+        description: newValue.description ?? '',
+        price: newValue.price ?? 0,
+        status: newValue.status ?? false,
+      });
     }
-
+  },
+  { immediate: true } // 🔑 importante para que se reactive incluso si el modal ya estaba abierto
 );
 </script>
 

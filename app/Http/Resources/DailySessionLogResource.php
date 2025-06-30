@@ -18,8 +18,8 @@ class DailySessionLogResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'price' => $this->price,
-            'payment_method' => $this->paymentMethod->id,
-            'payment_method_name' => $this->paymentMethod->name,
+            'payment_method_id' => $this->payment_method_id,
+            'payment_method' => new PaymentMethodResource($this->whenLoaded('paymentMethod')),
             'registered_at' => $this->registered_at->format('Y-m-d H:i:s'),
         ];
     }

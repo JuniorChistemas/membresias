@@ -14,7 +14,7 @@
                 <!-- Ingresar el nombre -->
                  <FormField v-slot="{ componentField }" name="name">
                     <FormItem>
-                        <FormLabel>Nombre de la membresia</FormLabel>
+                        <FormLabel>Nombre del metodo</FormLabel>
                         <FormControl>
                             <Input id="name" type="text" v-bind="componentField"/>
                         </FormControl>

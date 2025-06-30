@@ -26,9 +26,9 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CustomerSeeder::class,
             TypeMembershipSeeder::class,
-            PaymentMethodSeeder::class,
+            // PaymentMethodSeeder::class,
             CoachSeeder::class,
-            DailySessionLogSeeder::class,
+            // DailySessionLogSeeder::class,
         ]);
     }
 }

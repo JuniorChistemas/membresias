@@ -116,9 +116,9 @@ export const useTypeMembership = () => {
         }
     };
 
-    const updateTypeMembership = async (data: updateTypeMembershipRequest) => {
+    const updateTypeMembership = async (id: number, typeMembershipData: updateTypeMembershipRequest) => {
         try {
-            const response = await TypeMembershipService.updateTypeMembership(data);
+            const response = await TypeMembershipService.updateTypeMembership(id, typeMembershipData);
             if (handleApiResponse(response, 'Tipo de membresía actualizada')) {
                 closeModal('createEdit');
                 await refreshTypeMemberships();

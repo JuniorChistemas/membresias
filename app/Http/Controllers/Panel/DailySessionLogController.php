@@ -8,6 +8,7 @@ use App\Http\Requests\StoreDailySessionLogRequest;
 use App\Http\Requests\UpdateDailySessionLogRequest;
 use Illuminate\Http\Request;
 use App\Http\Resources\DailySessionLogResource;
+use Inertia\Inertia;
 
 class DailySessionLogController extends Controller
 {
@@ -22,12 +23,18 @@ class DailySessionLogController extends Controller
         $endDate = $request->input('end_date');     // formato esperado: YYYY-MM-DD
 
         $dailySessionLogs = DailySessionLog::with('paymentMethod')
+            // Filtrar por método de pago si se envía
             ->when($paymentMethodId, function ($query) use ($paymentMethodId) {
                 $query->where('payment_method_id', $paymentMethodId);
             })
+            // Filtrar por rango de fechas si ambos están presentes
             ->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
-                $query->whereBetween('registered_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59']);
+                $query->whereBetween('registered_at', [
+                    $startDate . ' 00:00:00',
+                    $endDate . ' 23:59:59'
+                ]);
             })
+            // Ordenar por fecha descendente (más recientes primero)
             ->orderBy('registered_at', 'desc')
             ->paginate(10);
 
@@ -47,12 +54,16 @@ class DailySessionLogController extends Controller
     
     public function index()
     {
-        return Intertia::render('Panel/DailySessionLogs/indexDailySessionLogs');
+        return Inertia::render('Panel/DailySessionLogs/indexDailySessionLogs');
     }
 
     public function store(StoreDailySessionLogRequest $request)
     {
-        $dailySessionLog = DailySessionLog::create($request->validated());
+        $data = $request->validated();
+        $data['registered_at'] = now(); // <-- asigna la fecha con timezone correcto
+
+        $dailySessionLog = DailySessionLog::create($data);
+
         return response()->json([
             'success' => true,
             'message' => 'Registro de sesión creado exitosamente',

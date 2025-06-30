@@ -64,9 +64,9 @@ export const TypeMembershipService = {
     },
 
     // Update type membership
-    async updateTypeMembership(data: updateTypeMembershipRequest): Promise<ResponseTypeMembershipUpdate> {
+    async updateTypeMembership(id: number, data: updateTypeMembershipRequest): Promise<ResponseTypeMembershipUpdate> {
         try {
-            const response = await axios.put(`/panel/typeMemberships/${data.id}`, data);
+            const response = await axios.put(`/panel/typeMemberships/${id}`, data);
             return response.data;
         } catch (error) {
             return handleApiError(error);
