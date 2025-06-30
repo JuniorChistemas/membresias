@@ -6,6 +6,7 @@ use App\Http\Controllers\Panel\UserController;
 use App\Http\Controllers\Panel\TypeMembershipController;
 use App\Http\Controllers\Panel\PaymentMethodController;
 use App\Http\Controllers\Panel\CoachController;
+use App\Http\Controllers\Panel\DailySessionLogController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Reportes\LocalPDFController;
@@ -53,6 +54,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // module coaches
         Route::resource('coaches', CoachController::class)->except(['create', 'edit']);
         Route::get('list-coaches', [CoachController::class, 'listCoaches'])->name('list-coaches');
+
+        // module daily session logs
+        Route::resource('dailySessionLogs', DailySessionLogController::class)->except(['create', 'edit']);
+        Route::get('list-dailySessionLogs', [DailySessionLogController::class, 'listDailySessionLogs'])->name('list-dailySessionLogs');
 
         Route::prefix('reports')->name('reports.')->group(function(){
 

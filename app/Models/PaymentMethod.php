@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PaymentMethod extends Model
 {
@@ -19,4 +20,8 @@ class PaymentMethod extends Model
     protected $casts = [
         'status' => 'boolean',
     ];
+
+    public function dailySessionLog():HasMany{
+        return $this->hasMany(DailySessionLog::class);
+    }
 }

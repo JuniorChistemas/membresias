@@ -46,7 +46,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Registro de sesiones',
-        href: '/dashboard',
+        href: '/panel/dailySessionLogs',
         icon: Activity,
     },
     {
