@@ -60,6 +60,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('list-dailySessionLogs', [DailySessionLogController::class, 'listDailySessionLogs'])->name('list-dailySessionLogs');
         Route::get('paymentMethods-all', [PaymentMethodController::class, 'getAll'])->name('paymentMethods.all');
 
+        // module monthly payments
+        Route::resource('monthlyPayments', MonthlyPaymentController::class)->except(['create', 'edit']);
+        Route::get('list-monthlyPayments', [MonthlyPaymentController::class, 'listMonthlyPayments'])->name('list-monthlyPayments');
+        Route::get('customers-all', [CustomerController::class, 'getAll'])->name('customers.all');
+        Route::get('typeMemberships-all', [TypeMembershipController::class, 'getAll'])->name('typeMemberships.all');
+        Route::get('coaches-all', [CoachController::class, 'getAll'])->name('coaches.all');
+        Route::get('paymentMethods-all', [PaymentMethodController::class, 'getAll'])->name('paymentMethods.all');
+
+
+
         Route::prefix('reports')->name('reports.')->group(function(){
 
             #Exports to Excel

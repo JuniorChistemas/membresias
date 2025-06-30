@@ -24,4 +24,9 @@ class PaymentMethod extends Model
     public function dailySessionLog():HasMany{
         return $this->hasMany(DailySessionLog::class);
     }
+
+    public function monthlyPayments():HasMany
+    {
+        return $this->hasMany(MonthlyPayment::class, 'payment_method_id');
+    }
 }

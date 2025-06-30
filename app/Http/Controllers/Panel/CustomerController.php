@@ -116,4 +116,15 @@ class CustomerController extends Controller
         ]);
     }
 
+    public function getAll()
+    {
+        $customers = Customer::orderBy('id')->get();
+
+        return response()->json([
+            'success' => true,
+            'customers' => CustomerResource::collection($customers),
+        ]);
+    }
+
+
 }

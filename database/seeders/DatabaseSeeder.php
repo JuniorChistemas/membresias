@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             // PaymentMethodSeeder::class,
             CoachSeeder::class,
             // DailySessionLogSeeder::class,
+            MonthlyPaymentSeeder::class,
         ]);
     }
 }

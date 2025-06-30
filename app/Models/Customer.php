@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Customer extends Model
 {
@@ -18,15 +19,23 @@ class Customer extends Model
         'address',
         'status',
     ];
+
     protected $casts = [
         'status' => 'boolean',
     ];
+
     public function getFullNameAttribute(): string
     {
         return "{$this->first_name} {$this->last_name}";
     }
+
     public function getCodeAttribute($value): string
     {
         return strtoupper($value);
+    }
+
+    public function monthlyPayments(): HasMany
+    {
+        return $this->hasMany(MonthlyPayment::class, 'customer_id', 'id');
     }
 }

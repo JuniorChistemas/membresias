@@ -108,4 +108,15 @@ class CoachController extends Controller
             'message' => 'Importación de entrenadores realizado correctamente.',
         ]);
     }
+
+    public function getAll()
+    {
+        $coaches = Coach::orderBy('id')->get();
+
+        return response()->json([
+            'success' => true,
+            'coaches' => CoachResource::collection($coaches),
+        ]);
+    }
+
 }

@@ -113,4 +113,14 @@ class TypeMembershipController extends Controller
             'message' => 'Importación de tipo de membresias realizado correctamente.',
         ]);
     }
+
+    public function getAll()
+    {
+        $memberships = TypeMembership::orderBy('id')->get();
+
+        return response()->json([
+            'success' => true,
+            'typeMemberships' => TypeMembershipResource::collection($memberships),
+        ]);
+    }
 }
