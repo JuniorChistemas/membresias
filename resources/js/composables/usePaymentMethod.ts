@@ -106,7 +106,7 @@ export const usePaymentMethod = () => {
         try {
             const response = await PaymentMethodService.getPaymentMethodById(id);
             if (response.success) {
-                state.paymentMethod = response.payment_method;
+                state.paymentMethod = response.paymentMethod;
                 state.modals.createEdit = true;
             }
         } catch (error) {

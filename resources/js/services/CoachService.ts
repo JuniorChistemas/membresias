@@ -87,7 +87,7 @@ export const CoachService = {
     // Update coach
     async updateCoach(id: number, data: updateCoachRequest): Promise<ResponseCoachUpdate> {
         try {
-            const response = await axios.put(`/panel/coaches/${data.id}`, data);
+            const response = await axios.put(`/panel/coaches/${id}`, data);
             return response.data;
         } catch (error) {
             return handleApiError(error);

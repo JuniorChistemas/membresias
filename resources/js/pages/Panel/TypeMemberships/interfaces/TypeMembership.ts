@@ -27,13 +27,13 @@ export type TypeMembershipFormData = storeTypeMembershipRequest | updateTypeMemb
 export interface ResponseTypeMembershipStore {
     success: boolean;
     message: string;
-    type_membership: TypeMembershipResource;
+    typeMembership: TypeMembershipResource;
 }
 
 export interface ResponseTypeMembershipUpdate {
     success: boolean;
     message: string;
-    type_membership: TypeMembershipResource;
+    typeMembership: TypeMembershipResource;
 }
 
 export interface ResponseTypeMembershipDelete {
@@ -43,5 +43,5 @@ export interface ResponseTypeMembershipDelete {
 
 export interface ResponseTypeMembershipGetId {
     success: boolean;
-    type_membership: TypeMembershipResource;
+    typeMembership: TypeMembershipResource;
 }

@@ -31,7 +31,7 @@
                         <ModalPaymentMethods
                             :status-modal="modals.createEdit"
                             @close-modal="handleCloseModalCreate"
-                            :payment-method="paymentMethod"
+                            :paymentMethod="paymentMethod"
                             @create="handleCreate"
                             @update="handleUpdate"
                             />

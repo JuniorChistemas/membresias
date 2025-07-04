@@ -26,13 +26,13 @@ export type PaymentMethodFormData = storePaymentMethodRequest | updatePaymentMet
 export interface ResponsePaymentMethodStore {
     success: boolean;
     message: string;
-    payment_method: PaymentMethodResource;
+    paymentMethod: PaymentMethodResource;
 }
 
 export interface ResponsePaymentMethodUpdate {
     success: boolean;
     message: string;
-    payment_method: PaymentMethodResource;
+    paymentMethod: PaymentMethodResource;
 }
 
 export interface ResponsePaymentMethodDelete {
@@ -42,5 +42,5 @@ export interface ResponsePaymentMethodDelete {
 
 export interface ResponsePaymentMethodGetId {
     success: boolean;
-    payment_method: PaymentMethodResource;
+    paymentMethod: PaymentMethodResource;
 }

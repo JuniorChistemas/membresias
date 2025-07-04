@@ -107,7 +107,7 @@ export const useTypeMembership = () => {
         try {
             const response = await TypeMembershipService.getTypeMembershipById(id);
             if (response.success){
-                state.typeMembership = response.type_membership;
+                state.typeMembership = response.typeMembership;
                 state.modals.createEdit = true;
             }
         } catch (error) {
@@ -119,7 +119,7 @@ export const useTypeMembership = () => {
     const updateTypeMembership = async (id: number, typeMembershipData: updateTypeMembershipRequest) => {
         try {
             const response = await TypeMembershipService.updateTypeMembership(id, typeMembershipData);
-            if (handleApiResponse(response, 'Tipo de membresía actualizada')) {
+            if (handleApiResponse(response, 'Tipo de membresía actualizada exitosamente')) {
                 closeModal('createEdit');
                 await refreshTypeMemberships();
             }

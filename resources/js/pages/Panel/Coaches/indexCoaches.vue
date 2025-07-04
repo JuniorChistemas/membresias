@@ -96,14 +96,14 @@ const handlePageChange = (page: number) => {
     getCoaches(page);
 };
 
-const handleOpenModalUpdate = (customer_id: number) => {
-    console.log('update: ' + customer_id);
-    getCoachById(customer_id);
+const handleOpenModalUpdate = (coach_id: number) => {
+    console.log('update: ' + coach_id);
+    getCoachById(coach_id);
 };
 
-const handleOpenModalDelete = (customer_id: number) => {
-    console.log('delete: ' + customer_id);
-    deleteCoach(customer_id);
+const handleOpenModalDelete = (coach_id: number) => {
+    console.log('delete: ' + coach_id);
+    deleteCoach(coach_id);
 };
 
 const handleCreate = (data: storeCoachRequest) => {

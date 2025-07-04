@@ -14,7 +14,7 @@
                             <TableHead class="table-head">Correo</TableHead>
                             <TableHead class="table-head">Dirección</TableHead>
                             <TableHead class="table-head-status">Estado</TableHead>
-                            <TableHead class="table-head-actions"></TableHead>
+                            <TableHead class="table-head-actions">Acciones</TableHead>
                         </TableRow>
                     </TableHeader>
 
@@ -86,7 +86,7 @@ import { Pagination } from '@/interfaces/paginacion';
 import TableBody from '@/components/ui/table/TableBody.vue';
 import TableCell from '@/components/ui/table/TableCell.vue';
 import Button from '@/components/ui/button/Button.vue';
-import { UserPen } from 'lucide-vue-next';
+import { Trash, UserPen } from 'lucide-vue-next';
 import PaginationCoach from '../../../../components/paginate.vue';
 
 const props = defineProps<{

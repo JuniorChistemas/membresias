@@ -18,7 +18,7 @@
                     </div>
                  </div>
 
-                 <div>
+                 <div class="mb-4 px-6 py-2">
                     <TableDailySessionLogs
                         :dailySessionLogs="dailySessionLogs"
                         :pagination="pagination"
@@ -30,7 +30,7 @@
 
                     <ModalDailySessionLogs
                         :status-modal="modals.createEdit"
-                        :daily-session-log="dailySessionLog"
+                        :dailySessionLog="dailySessionLog"
                         :payment-methods="paymentMethods"
                         @close-modal="handleCloseModalCreate"
                         @create="handleCreate"

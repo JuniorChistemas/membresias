@@ -7,8 +7,11 @@
                 </DialogTitle>
                 <DialogDescription> Asegúrate de que la información sea correcta. </DialogDescription>
             </DialogHeader>
+
             <!-- formulario -->
             <form @submit.prevent="submitForm" class="flex flex-col gap-4 py-3">
+
+                <!-- Ingresar el nombre del entrenador -->
                 <FormField v-slot="{ componentField }" name="name">
                     <FormItem>
                         <FormLabel>Nombre</FormLabel>

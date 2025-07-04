@@ -31,7 +31,7 @@
                     <ModalTypeMemberships
                         :status-modal="modals.createEdit"
                         @close-modal="handleCloseModalCreate"
-                        :type-membership="typeMembership"
+                        :typeMembership="typeMembership"
                         @create="handleCreate"
                         @update="handleUpdate"
                     />

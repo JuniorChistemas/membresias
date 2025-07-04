@@ -106,7 +106,7 @@ export const useCoach = () => {
             const response = await CoachService.getCoachById(id);
             if (response.success) {
                 state.coach = response.coach;
-                state.modals
+                state.modals.createEdit = true;
             }
         } catch (error) {
             handleApiError(error, "Error al cargar el entrenador");

@@ -154,7 +154,6 @@ watch(
       });
     }
   },
-  { immediate: true } // 🔑 importante para que se reactive incluso si el modal ya estaba abierto
 );
 </script>
 
