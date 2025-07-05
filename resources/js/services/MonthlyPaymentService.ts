@@ -1,12 +1,12 @@
 import {
-    PaymentMethodTable,
-    ResponsePaymentMethodDelete,
-    ResponsePaymentMethodGetId,
-    ResponsePaymentMethodStore,
-    ResponsePaymentMethodUpdate,
-    storePaymentMethodRequest,
-    updatePaymentMethodRequest
-} from '@/pages/Panel/PaymentMethods/interfaces/PaymentMethod';
+    MonthlyPaymentTable,
+    ResponseMonthlyPaymentDelete,
+    ResponseMonthlyPaymentGetId,
+    ResponseMonthlyPaymentStore,
+    ResponseMonthlyPaymentUpdate,
+    StoreMonthlyPaymentRequest,
+    UpdateMonthlyPaymentRequest
+} from '@/pages/Panel/MonthlyPayments/interfaces/MonthlyPayment';
 
 import axios, { AxiosError } from 'axios';
 
@@ -43,64 +43,54 @@ const handleApiError = (error: unknown): never => {
     throw error instanceof Error ? error : new Error('Unknown error');
 };
 
-export const PaymentMethodService = {
-    // List payment methods
-    async listPaymentMethods(page: number, search: string): Promise<PaymentMethodTable> {
+export const MonthlyPaymentService = {
+    // List monthly payments
+    async listMonthlyPayments(page: number, search: string): Promise<MonthlyPaymentTable> {
         try {
-            const response = await axios.get(`/panel/list-paymentMethods?page=${page}&search=${search}`);
+            const response = await axios.get(`/panel/list-monthlyPayments?page=${page}&search=${search}`);
             return response.data;
         } catch (error) {
             return handleApiError(error);
         }
     },
 
-    // Create payment method
-    async storePaymentMethod(data: storePaymentMethodRequest): Promise<ResponsePaymentMethodStore> {
+    // Create monthly payment
+    async storeMonthlyPayment(data: StoreMonthlyPaymentRequest): Promise<ResponseMonthlyPaymentStore> {
         try {
-            const response = await axios.post('/panel/paymentMethods', data);
+            const response = await axios.post('/panel/monthlyPayments', data);
             return response.data;
         } catch (error) {
             return handleApiError(error);
         }
     },
 
-    // Update payment method
-    async updatePaymentMethod(data: updatePaymentMethodRequest): Promise<ResponsePaymentMethodUpdate> {
+    // Update monthly payment
+    async updateMonthlyPayment(data: UpdateMonthlyPaymentRequest): Promise<ResponseMonthlyPaymentUpdate> {
         try {
-            const response = await axios.put(`/panel/paymentMethods/${data.id}`, data);
+            const response = await axios.put(`/panel/monthlyPayments/${data.id}`, data);
             return response.data;
         } catch (error) {
             return handleApiError(error);
         }
     },
 
-    // Delete payment method
-    async deletePaymentMethod(id: number): Promise<ResponsePaymentMethodDelete> {
+    // Delete monthly payment
+    async deleteMonthlyPayment(id: number): Promise<ResponseMonthlyPaymentDelete> {
         try {
-            const response = await axios.delete(`/panel/paymentMethods/${id}`);
+            const response = await axios.delete(`/panel/monthlyPayments/${id}`);
             return response.data;
         } catch (error) {
             return handleApiError(error);
         }
     },
 
-    // Get payment method by ID
-    async getPaymentMethodById(id: number): Promise<ResponsePaymentMethodGetId> {
+    // Get monthly payment by ID
+    async getMonthlyPaymentById(id: number): Promise<ResponseMonthlyPaymentGetId> {
         try {
-            const response = await axios.get(`/panel/paymentMethods/${id}`);
+            const response = await axios.get(`/panel/monthlyPayments/${id}`);
             return response.data;
         } catch (error) {
             return handleApiError(error);
         }
-    },
-
-    async getAll() {
-        try {
-            const response = await axios.get('/panel/paymentMethods-all');
-            return response.data;
-        } catch (error) {
-            // Maneja el error como en tus otros métodos
-            throw error;
-        }
-    },
+    }
 };

@@ -94,4 +94,14 @@ export const CoachService = {
         }
     },
 
+    async getAll() {
+        try {
+            const response = await axios.get('/panel/coaches-all');
+            return response.data;
+        } catch (error) {
+            // Maneja el error como en tus otros métodos
+            throw error;
+        }
+    },
+
 };

@@ -14,7 +14,9 @@
                  <div class="flex flex-wrap justify-between items-center mb-4 px-6 mt-4 gap-2">
                     <Button @click="handleOpenModalCreate">Nuevo registro</Button>
                     <div class="flex items-center gap-2">
-
+                        <FilterDailySessiongLogs
+                            :payment-methods="paymentMethods"
+                            @filter="handleFilter" />
                     </div>
                  </div>
 
@@ -52,7 +54,9 @@ import TableDailySessionLogs from './components/tableDailySessionLogs.vue';
 import { useDailySessionLog } from '@/composables/useDailySessionLog';
 import { storeDailySessionLogRequest, updateDailySessionLogRequest } from './interfaces/DailySessionLog';
 import { onMounted } from 'vue';
+import { ref } from 'vue';
 import ModalDailySessionLogs from './components/modalDailySessionLogs.vue';
+import FilterDailySessiongLogs from './components/filterDailySessionLogs.vue';
 
 const breadcrumbs = [
     {
@@ -78,10 +82,12 @@ const {
     paymentMethods,    // ✅ ya puedes pasarla al modal
 } = useDailySessionLog();
 
-// function to handle search
-    const handleSearch = (searchText: string) => {
-        getDailySessionLogs(1, searchText);
-    };
+const filter = ref<{ payment_method_id?: number; start_date?: string; end_date?: string }>({});
+
+const handleFilter = (newFilter: typeof filter.value) => {
+  filter.value = newFilter;
+  getDailySessionLogs(1, filter.value);
+};
 
     // function to handle modal create
     const handleOpenModalCreate = () => {

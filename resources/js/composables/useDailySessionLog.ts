@@ -37,7 +37,10 @@ export const useDailySessionLog = () => {
         try {
             const response = await axios.get('/panel/paymentMethods-all');
             if (response.data.success) {
-                state.paymentMethods = response.data.paymentMethods;
+                // Filtra solo los métodos de pago activos
+                state.paymentMethods = response.data.paymentMethods.filter(
+                    (method: PaymentMethodResource) => method.status === true
+                );
             }
         } catch (error) {
             handleApiError(error, 'Error al obtener métodos de pago');
@@ -76,13 +79,13 @@ export const useDailySessionLog = () => {
     };
 
     const refreshDailySessionLogs = async () => {
-        await getDailySessionLogs(state.pagination.current_page || 1, state.search);
+        await getDailySessionLogs(state.pagination.current_page || 1, {});    
     };
 
-    const getDailySessionLogs = async (page = 1, searchTerm = '') => {
+        const getDailySessionLogs = async (page = 1, filter: { payment_method_id?: number; start_date?: string; end_date?: string } = {}) => {
         try {
             state.loading = true;
-            const response = await DailySessionLogService.listDailySessionLogs(page, searchTerm);
+            const response = await DailySessionLogService.listDailySessionLogs(page, filter);
             if (response.success) {
                 state.dailySessionLogs = response.dailySessionLogs;
                 state.pagination = response.pagination;

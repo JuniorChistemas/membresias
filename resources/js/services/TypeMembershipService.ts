@@ -92,4 +92,14 @@ export const TypeMembershipService = {
             return handleApiError(error);
         }
     },
+
+    async getAll() {
+        try {
+            const response = await axios.get('/panel/typeMemberships-all');
+            return response.data;
+        } catch (error) {
+            // Maneja el error como en tus otros métodos
+            throw error;
+        }
+    },
 };

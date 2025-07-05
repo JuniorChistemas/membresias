@@ -42,9 +42,10 @@ const handleApiError = (error: unknown): never => {
 };
 
 export const DailySessionLogService = {
-    async listDailySessionLogs(page: number, search: string): Promise<DailySessionLogTable> {
+    async listDailySessionLogs(page: number, filter: { payment_method_id?: number; start_date?: string; end_date?: string } = {}) {
         try {
-            const response = await axios.get(`/panel/list-dailySessionLogs?page=${page}&search=${search}`);
+            const params = { page, ...filter };
+            const response = await axios.get('/panel/list-dailySessionLogs', { params });
             return response.data;
         } catch (error) {
             return handleApiError(error);

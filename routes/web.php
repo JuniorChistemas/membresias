@@ -7,6 +7,7 @@ use App\Http\Controllers\Panel\TypeMembershipController;
 use App\Http\Controllers\Panel\PaymentMethodController;
 use App\Http\Controllers\Panel\CoachController;
 use App\Http\Controllers\Panel\DailySessionLogController;
+use App\Http\Controllers\Panel\MonthlyPaymentController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Reportes\LocalPDFController;

@@ -51,7 +51,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Mensualidades',
-        href: '/dashboard',
+        href: '/panel/monthlyPayments',
         icon: Wallet,
     },
 ];
