@@ -5,7 +5,7 @@ import {
     ResponseMonthlyPaymentStore,
     ResponseMonthlyPaymentUpdate,
     StoreMonthlyPaymentRequest,
-    UpdateMonthlyPaymentRequest
+    UpdateMonthlyPaymentRequest,
 } from '@/pages/Panel/MonthlyPayments/interfaces/MonthlyPayment';
 
 import axios, { AxiosError } from 'axios';
@@ -47,7 +47,8 @@ export const MonthlyPaymentService = {
     // List monthly payments
     async listMonthlyPayments(page: number, search: string): Promise<MonthlyPaymentTable> {
         try {
-            const response = await axios.get(`/panel/list-monthlyPayments?page=${page}&search=${search}`);
+            const response = await axios.get(`/panel/list-monthlyPayments?page=${page}`);
+            console.log('Response from listMonthlyPayments:', response.data);
             return response.data;
         } catch (error) {
             return handleApiError(error);
@@ -92,5 +93,5 @@ export const MonthlyPaymentService = {
         } catch (error) {
             return handleApiError(error);
         }
-    }
+    },
 };

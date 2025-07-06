@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
         $adminRole->syncPermissions($permissions);
         $personalRole->syncPermissions($personalPermissions);
         $admin_1->assignRole($adminRole);
-        $admin_2->assignRole($personalRole);
+        $admin_2->assignRole($adminRole);
 
         User::factory()->count(10)->create()->each(function ($user) use ($personalRole) {
             $user->assignRole($personalRole);

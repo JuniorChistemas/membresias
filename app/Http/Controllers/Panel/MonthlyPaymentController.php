@@ -47,7 +47,7 @@ class MonthlyPaymentController extends Controller
             ->when($search, function ($query) use ($search) {
                 $query->whereHas('customer', function ($q) use ($search) {
                     $q->where('first_name', 'like', "%{$search}%")
-                    ->orWhere('last_name', 'like', "%{$search}%");
+                        ->orWhere('last_name', 'like', "%{$search}%");
                 });
             })
             // ...los demás filtros
@@ -55,17 +55,17 @@ class MonthlyPaymentController extends Controller
             ->paginate(10);
 
         return response()->json([
-                'success' => true,
-                'monthlyPayments' => MonthlyPaymentResource::collection($payments),
-                'pagination' => [
-                    'total' => $payments->total(),
-                    'current_page' => $payments->currentPage(),
-                    'per_page' => $payments->perPage(),
-                    'last_page' => $payments->lastPage(),
-                    'from' => $payments->firstItem(),
-                    'to' => $payments->lastItem()
-                ],
-            ]);
+            'success' => true,
+            'monthlyPayments' => MonthlyPaymentResource::collection($payments),
+            'pagination' => [
+                'total' => $payments->total(),
+                'current_page' => $payments->currentPage(),
+                'per_page' => $payments->perPage(),
+                'last_page' => $payments->lastPage(),
+                'from' => $payments->firstItem(),
+                'to' => $payments->lastItem()
+            ],
+        ]);
     }
 
     public function store(StoreMonthlyPaymentRequest $request)
@@ -78,7 +78,7 @@ class MonthlyPaymentController extends Controller
             'monthly_payment' => new MonthlyPaymentResource($payment->load(['customer', 'typeMembership', 'paymentMethod', 'coach'])),
         ]);
     }
-    
+
     public function show(MonthlyPayment $monthlyPayment)
     {
         return response()->json([

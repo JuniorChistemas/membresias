@@ -1,24 +1,24 @@
-import { Pagination } from "@/interfaces/paginacion";
+import { Pagination } from '@/interfaces/paginacion';
 import {
     MonthlyPaymentResource,
     StoreMonthlyPaymentRequest,
-    UpdateMonthlyPaymentRequest
-} from "@/pages/Panel/MonthlyPayments/interfaces/MonthlyPayment";
-import { MonthlyPaymentService } from "@/services/MonthlyPaymentService";
-import { showErrorMessage, showSuccessMessage } from "@/utils/messages";
-import { reactive, toRefs } from "vue";
+    UpdateMonthlyPaymentRequest,
+} from '@/pages/Panel/MonthlyPayments/interfaces/MonthlyPayment';
+import { MonthlyPaymentService } from '@/services/MonthlyPaymentService';
+import { showErrorMessage, showSuccessMessage } from '@/utils/messages';
+import { reactive, toRefs } from 'vue';
 
 // Importa los recursos de catálogos
-import { CustomerResource } from "@/pages/Panel/Customers/interfaces/Customer";
-import { TypeMembershipResource } from "@/pages/Panel/TypeMemberships/interfaces/TypeMembership";
-import { PaymentMethodResource } from "@/pages/Panel/PaymentMethods/interfaces/PaymentMethod";
-import { CoachResource } from "@/pages/Panel/Coaches/interfaces/Coach";
+import { CoachResource } from '@/pages/Panel/Coaches/interfaces/Coach';
+import { CustomerResource } from '@/pages/Panel/Customers/interfaces/Customer';
+import { PaymentMethodResource } from '@/pages/Panel/PaymentMethods/interfaces/PaymentMethod';
+import { TypeMembershipResource } from '@/pages/Panel/TypeMemberships/interfaces/TypeMembership';
 
 // Importa los servicios de catálogos
-import { CustomerService } from "@/services/CustomerService";
-import { TypeMembershipService } from "@/services/TypeMembershipService";
-import { PaymentMethodService } from "@/services/PaymentMethodService";
-import { CoachService } from "@/services/CoachService";
+import { CoachService } from '@/services/CoachService';
+import { CustomerService } from '@/services/CustomerService';
+import { PaymentMethodService } from '@/services/PaymentMethodService';
+import { TypeMembershipService } from '@/services/TypeMembershipService';
 
 type ModalType = 'createEdit' | 'delete';
 
@@ -129,7 +129,9 @@ export const useMonthlyPayment = () => {
             state.loading = true;
             const response = await MonthlyPaymentService.listMonthlyPayments(page, filter);
             if (response.success) {
-                state.monthlyPayments = response.monthlyPayments;            }
+                console.log('Response:', response);
+                state.monthlyPayments = response.monthlyPayments;
+            }
         } catch (error) {
             handleApiError(error, 'Error al obtener las mensualidades');
         } finally {
